@@ -19,6 +19,7 @@ namespace RMM.Phone.ViewModel
             SimpleIoc.Default.Register<EditCategoryViewModel>();
             SimpleIoc.Default.Register<CreateAccountViewModel>();
             SimpleIoc.Default.Register<CreateCategoryViewModel>();
+            SimpleIoc.Default.Register<LiveSignInViewModel>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -78,6 +79,14 @@ namespace RMM.Phone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CreateCategoryViewModel>();
+            }
+        }
+
+        public LiveSignInViewModel Live
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LiveSignInViewModel>();
             }
         }
 

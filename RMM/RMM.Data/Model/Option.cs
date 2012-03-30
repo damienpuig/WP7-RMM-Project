@@ -20,6 +20,12 @@ namespace RMM.Data.Model
         public bool IsSynchro { get; set; }
 
         [Column]
+        public DateTime RefreshTimeBackup { get; set; }
+
+        [Column]
+        public int LastBackupVersion { get; set; }
+
+        [Column]
         public bool IsPrimaryTile { get; set; }
 
 

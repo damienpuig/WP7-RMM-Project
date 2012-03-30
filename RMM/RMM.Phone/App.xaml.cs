@@ -14,6 +14,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using RMM.Phone.ViewModel;
 using RMM.Phone.BusinessModel;
+using Microsoft.Live;
 
 namespace RMM.Phone
 {
@@ -29,6 +30,20 @@ namespace RMM.Phone
             get;
             private set;
         }
+
+        private static LiveConnectSession session = null;
+        public static LiveConnectSession Session
+        {
+            get
+            {
+                return session;
+            }
+            set
+            {
+                session = value;
+            }
+        }
+
 
         // Constructor
         public App()

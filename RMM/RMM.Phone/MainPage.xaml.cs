@@ -59,5 +59,10 @@ namespace RMM.Phone
         {
             NavigationService.Navigate(new System.Uri("/View/CreateAccount.xaml", System.UriKind.Relative));
         }
+
+        private void appbar_button1_Click_1(object sender, System.EventArgs e)
+        {
+            NavigationService.Navigate(new System.Uri("/LiveSignIn.xaml", System.UriKind.Relative));
+        }
     }
 }

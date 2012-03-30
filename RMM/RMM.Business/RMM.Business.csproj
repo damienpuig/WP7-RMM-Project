@@ -41,7 +41,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Live, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live.Controls, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live.Controls.resources">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Live\v5.0\Windows Phone\References\en-gb\Microsoft.Live.Controls.resources.dll</HintPath>
+    </Reference>
     <Reference Include="system.data.linq" />
+    <Reference Include="System.Threading.Tasks.WP71">
+      <HintPath>..\packages\System.Threading.Tasks.3.0\lib\sl4-wp71\System.Threading.Tasks.WP71.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -63,10 +71,14 @@
     <Compile Include="DatabaseService\IDatabaseService.cs" />
     <Compile Include="DumpMyDBSQLCE.cs" />
     <Compile Include="Erreur.cs" />
+    <Compile Include="LiveService\ILiveService.cs" />
+    <Compile Include="LiveService\LiveService.cs" />
     <Compile Include="OptionService\IOptionService.cs" />
     <Compile Include="OptionService\OptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
+    <Compile Include="ServiceBase\IWorkService.cs" />
+    <Compile Include="ServiceBase\WorkService.cs" />
     <Compile Include="TransactionService\CreateTransactionCommand.cs" />
     <Compile Include="TransactionService\EditTransactionCommand.cs" />
     <Compile Include="TransactionService\ITransactionService.cs" />
@@ -77,6 +89,9 @@
       <Project>{36C0EAB3-441F-44A6-A660-DDE6FD54B9CD}</Project>
       <Name>RMM.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

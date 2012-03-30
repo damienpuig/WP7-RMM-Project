@@ -59,6 +59,14 @@
       <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WP71\GalaSoft.MvvmLight.Extras.WP71.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live.Controls, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live.Controls.Design">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Live\v5.0\Windows Phone\References\Design\Microsoft.Live.Controls.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live.Controls.resources">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Live\v5.0\Windows Phone\References\en-gb\Microsoft.Live.Controls.resources.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
@@ -68,6 +76,9 @@
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="Microsoft.Xna.Framework.Input.Touch" />
     <Reference Include="system.data.linq" />
+    <Reference Include="System.Threading.Tasks.WP71">
+      <HintPath>..\packages\System.Threading.Tasks.3.0\lib\sl4-wp71\System.Threading.Tasks.WP71.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WP71\System.Windows.Interactivity.dll</HintPath>
@@ -93,6 +104,9 @@
     <Compile Include="Execution\IThreadSafeGeneral.cs" />
     <Compile Include="Execution\ThreadSafeGeneral.cs" />
     <Compile Include="automapper\ObjectsExtensionsToViewData.cs" />
+    <Compile Include="LiveSignIn.xaml.cs">
+      <DependentUpon>LiveSignIn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +123,7 @@
     <Compile Include="ViewModel\CreateCategoryViewModel.cs" />
     <Compile Include="ViewModel\EditAccountViewModel.cs" />
     <Compile Include="ViewModel\EditCategoryViewModel.cs" />
+    <Compile Include="ViewModel\LiveSignInViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\About.xaml.cs">
@@ -138,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="LiveSignIn.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -172,6 +191,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>

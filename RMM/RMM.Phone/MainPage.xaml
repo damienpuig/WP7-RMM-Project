@@ -84,6 +84,7 @@
 				<shell:ApplicationBarMenuItem x:Name="addCategoryMenuItem" Text="add category" Click="addCategoryMenuItem_Click"/>
 			</shell:ApplicationBar.MenuItems>
 			<shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/icons/appbar.share.rest.png" Text="About" Click="appbar_button1_Click" />
+            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/icons/appbar.share.rest.png" Text="SKyDrive" Click="appbar_button1_Click_1"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 	
