@@ -71,14 +71,15 @@
     <Compile Include="DatabaseService\IDatabaseService.cs" />
     <Compile Include="DumpMyDBSQLCE.cs" />
     <Compile Include="Erreur.cs" />
+    <Compile Include="GeneralService\DataProtectionDatabase.cs" />
     <Compile Include="LiveService\ILiveService.cs" />
     <Compile Include="LiveService\LiveService.cs" />
     <Compile Include="OptionService\IOptionService.cs" />
     <Compile Include="OptionService\OptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
-    <Compile Include="ServiceBase\IWorkService.cs" />
-    <Compile Include="ServiceBase\WorkService.cs" />
+    <Compile Include="GeneralService\IWorkService.cs" />
+    <Compile Include="GeneralService\WorkService.cs" />
     <Compile Include="TransactionService\CreateTransactionCommand.cs" />
     <Compile Include="TransactionService\EditTransactionCommand.cs" />
     <Compile Include="TransactionService\ITransactionService.cs" />

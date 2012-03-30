@@ -87,6 +87,7 @@ namespace RMM.Phone.ExtensionMethods
             newOptionViewData.IsPrimaryTile = Objectsource.IsPrimaryTile;
             newOptionViewData.IsSynchro = Objectsource.IsSynchro;
             newOptionViewData.Favorite = Objectsource.Favorite;
+            newOptionViewData.RefreshTimeBackup = Objectsource.RefreshTimeBackup;
 
             return newOptionViewData;
         }

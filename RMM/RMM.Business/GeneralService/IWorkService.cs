@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RMM.Business.ServiceBase
+namespace RMM.Business.GeneralService
 {
    public interface IWorkService
     {

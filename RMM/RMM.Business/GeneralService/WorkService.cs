@@ -12,7 +12,7 @@ using System.Threading;
 using Microsoft.Live;
 using System.Threading.Tasks;
 
-namespace RMM.Business.ServiceBase
+namespace RMM.Business.GeneralService
 {
     public class WorkService : IWorkService
     {
@@ -21,12 +21,12 @@ namespace RMM.Business.ServiceBase
         {
             try
             {
-                Task.Factory.StartNew(id =>
+                Task.Factory.StartNew(param =>
                 {
 
                     //Donne a l'action le service instancier
                     var service = Activator.CreateInstance<T>();
-                    work(service, id);
+                    work(service, param);
 
 
 

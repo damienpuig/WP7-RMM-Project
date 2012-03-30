@@ -17,6 +17,8 @@ namespace RMM.Phone.ViewData.Account
 
         public bool IsSynchro { get; set; }
 
+        public DateTime RefreshTimeBackup { get; set; }
+
         public bool IsPrimaryTile { get; set; }
 
         public bool IsReport { get; set; }

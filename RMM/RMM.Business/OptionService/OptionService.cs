@@ -41,6 +41,7 @@ namespace RMM.Business.OptionService
                     entityToUpdate.IsSynchro = optionToUpdate.IsSynchro;
                     entityToUpdate.Favorite = optionToUpdate.Favorite;
                     entityToUpdate.ModifiedDate = DateTime.Now;
+                    entityToUpdate.RefreshTimeBackup = optionToUpdate.RefreshTimeBackup;
 
                     datacontext.SubmitChanges();
 
@@ -66,7 +67,9 @@ namespace RMM.Business.OptionService
                         IsPassword = false,
                         IsSynchro = false,
                         Favorite = 0,
-                        ModifiedDate = DateTime.Now
+                        LastBackupVersion = 0,
+                        ModifiedDate = DateTime.Now,
+                        RefreshTimeBackup = DateTime.Now
                     };
 
                     datacontext.Option.InsertOnSubmit(newFirstTimeOption);
