@@ -6,28 +6,43 @@ using RMM.Data;
 using RMM.Business.Helpers;
 using RMM.Data.Model;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
+using System.IO;
+using System.Windows;
 
 namespace RMM.Business.AccountService
 {
     public class AccountService: IAccountService
     {
-        private RmmDataContext datacontext = null;
+        private RmmDataContext dataContext = null;
+
+        public RmmDataContext DataContext
+        {
+            get { return dataContext; }
+            set
+            {
+                dataContext = value;
+                dataContext.ObjectTrackingEnabled = true;
+                dataContext.Log = Console.Out;
+            }
+        }
+        
 
         public Result<Account> DeleteAccountById(int accountId)
         {
             return Result<Account>.SafeExecute<AccountService>(result =>
             {
                  
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
-                    var account = (from t in datacontext.Account
+                    var account = (from t in DataContext.Account
                                     where t.ID == accountId
                                     select t).First();
 
                     if (account != null)
                     {
-                        datacontext.Account.DeleteOnSubmit(account);
-                        datacontext.SubmitChanges();
+                        DataContext.Account.Log().DeleteOnSubmit(account);
+                        DataContext.SubmitChanges();
                     }
 
                     result.Value = account;
@@ -41,12 +56,12 @@ namespace RMM.Business.AccountService
             
             return Result<Account>.SafeExecute<AccountService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
                     if (!OnMinimal)
-                        datacontext.LoadOptions = DBHelpers.GetConfigurationLoader<Account>(acc => acc.TransactionList);
+                        DataContext.LoadOptions = DBHelpers.GetConfigurationLoader<Account>(acc => acc.TransactionList);
 
-                    var account = datacontext.Account.Where(a => a.ID == accountId).First();
+                    var account = DataContext.Account.Log().Where(a => a.ID == accountId).First();
 
 
                     result.Value = account;
@@ -59,7 +74,7 @@ namespace RMM.Business.AccountService
         {
             return Result<Account>.SafeExecute<AccountService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
                     var newAccountEntity = new Account();
                     newAccountEntity.Name = newAccountCommand.Name;
@@ -68,11 +83,11 @@ namespace RMM.Business.AccountService
                     newAccountEntity.Balance = 0;
 
 
-                    datacontext.Account.InsertOnSubmit(newAccountEntity);
+                    DataContext.Account.InsertOnSubmit(newAccountEntity);
 
-                    datacontext.SubmitChanges();
+                    DataContext.SubmitChanges();
 
-                    var AddedAccount = datacontext.Account.Where(a => a.CreatedDate == newAccountEntity.CreatedDate).First();
+                    var AddedAccount = DataContext.Account.Log().Where(a => a.CreatedDate == newAccountEntity.CreatedDate).First();
 
                     result.Value = AddedAccount;
 
@@ -86,10 +101,10 @@ namespace RMM.Business.AccountService
             return Result<Account>.SafeExecute<AccountService>(result =>
             {
 
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
 
-                    var entityToUpdate = datacontext.Account.Where(t => t.ID == editAccountCommand.id).First();
+                    var entityToUpdate = DataContext.Account.Log().Where(t => t.ID == editAccountCommand.id).First();
 
                     entityToUpdate.ID = editAccountCommand.id;
                     entityToUpdate.Name = editAccountCommand.Name;
@@ -97,7 +112,7 @@ namespace RMM.Business.AccountService
                     entityToUpdate.CreatedDate = DateTime.Now;
 
 
-                    datacontext.SubmitChanges();
+                    DataContext.SubmitChanges();
 
                     result.Value = entityToUpdate;
                 }
@@ -110,14 +125,16 @@ namespace RMM.Business.AccountService
         {
             return Result<List<Account>>.SafeExecute<AccountService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING);
+
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
-                    if(!OnMinimal)
-                     datacontext.LoadOptions =   DBHelpers.GetConfigurationLoader<Account>(Acc => Acc.TransactionList);
+                          if (!OnMinimal)
+                              DataContext.LoadOptions = DBHelpers.GetConfigurationLoader<Account>(Acc => Acc.TransactionList);
 
-                    var accounts = datacontext.Account.ToList();
+                          var accounts = DataContext.Account.Log().ToList();
 
-                    result.Value = accounts;
+                          result.Value = accounts;
                 }
 
             }, () => "error");

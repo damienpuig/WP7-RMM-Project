@@ -81,8 +81,6 @@ namespace RMM.Business
                 }
             }
 
-            var transactions =
-
             #endregion
 
             #region Ajout Données

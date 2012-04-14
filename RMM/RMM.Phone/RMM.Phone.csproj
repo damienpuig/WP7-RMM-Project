@@ -75,6 +75,9 @@
     </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="Microsoft.Xna.Framework.Input.Touch" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="system.data.linq" />
     <Reference Include="System.Threading.Tasks.WP71">
       <HintPath>..\packages\System.Threading.Tasks.3.0\lib\sl4-wp71\System.Threading.Tasks.WP71.dll</HintPath>
@@ -125,6 +128,7 @@
     <Compile Include="ViewModel\EditCategoryViewModel.cs" />
     <Compile Include="ViewModel\LiveSignInViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RestaurerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -146,6 +150,9 @@
     </Compile>
     <Compile Include="View\EditCategory.xaml.cs">
       <DependentUpon>EditCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Restaurer.xaml.cs">
+      <DependentUpon>Restaurer.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +194,10 @@
     </Page>
     <Page Include="View\EditCategory.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Restaurer.xaml">
+      <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

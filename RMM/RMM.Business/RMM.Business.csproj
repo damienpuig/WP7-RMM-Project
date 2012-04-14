@@ -46,6 +46,9 @@
     <Reference Include="Microsoft.Live.Controls.resources">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Live\v5.0\Windows Phone\References\en-gb\Microsoft.Live.Controls.resources.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="system.data.linq" />
     <Reference Include="System.Threading.Tasks.WP71">
       <HintPath>..\packages\System.Threading.Tasks.3.0\lib\sl4-wp71\System.Threading.Tasks.WP71.dll</HintPath>
@@ -72,8 +75,11 @@
     <Compile Include="DumpMyDBSQLCE.cs" />
     <Compile Include="Erreur.cs" />
     <Compile Include="GeneralService\DataProtectionDatabase.cs" />
+    <Compile Include="GeneralService\IJsonSerialisation.cs" />
     <Compile Include="LiveService\ILiveService.cs" />
     <Compile Include="LiveService\LiveService.cs" />
+    <Compile Include="LiveService\SkyDriveBackup.cs" />
+    <Compile Include="LogExtensions.cs" />
     <Compile Include="OptionService\IOptionService.cs" />
     <Compile Include="OptionService\OptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

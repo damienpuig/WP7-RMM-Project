@@ -1,13 +1,10 @@
-﻿<phone:PhoneApplicationPage x:Class="RMM.Phone.LiveSignIn"
+﻿<phone:PhoneApplicationPage x:Class="RMM.Phone.View.Restaurer"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:live="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
-							xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-							xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
                             mc:Ignorable="d"
                             d:DesignWidth="480"
                             d:DesignHeight="768"
@@ -17,7 +14,7 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
-                            DataContext="{Binding Live, Source={StaticResource Locator}}">
+                            DataContext="{Binding Restaurer, Source={StaticResource Locator}}">
 
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
@@ -34,7 +31,7 @@
                        Text="Easy Money"
                        Style="{StaticResource PhoneTextNormalStyle}" />
             <TextBlock x:Name="PageTitle"
-                       Text="My Sauvegarde"
+                       Text="Restaurer"
                        Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
@@ -42,20 +39,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
-              Margin="12,0,0,0">
-            <Grid Height="512" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="468">
-                <Button Content="Save" Height="72" HorizontalAlignment="Left" Margin="0,6,0,0" Name="button1" VerticalAlignment="Top" Width="178" Command="{Binding SauvegarderCommand}"  />
-                <Button Content="Restore" Height="72" HorizontalAlignment="Left" Margin="0,84,0,0" Name="button2" VerticalAlignment="Top" Width="178" Command="{Binding RestaurerCommand}" />
-              
-                <live:SignInButton  ClickMode="Release"  ClientId="00000000400A0117" Scopes="wl.basic wl.photos wl.skydrive wl.offline_access wl.signin wl.skydrive_update" RedirectUri="http://oauth.live.com/desktop" Branding="Skydrive" TextType="SignIn" Margin="0,162,290,282" d:LayoutOverrides="VerticalAlignment">
-                    <Interactivity:Interaction.Triggers>
-                        <Interactivity:EventTrigger EventName="SessionChanged" x:Name="SignInStateChanged">
-                            <Command:EventToCommand Command="{Binding SessionStateChanged}" PassEventArgsToCommand="True" />
-                        </Interactivity:EventTrigger>
-                    </Interactivity:Interaction.Triggers>
-                </live:SignInButton>
-            </Grid>
-        </Grid>
+              Margin="12,0,12,0"></Grid>
     </Grid>
 
     <!--Sample code showing usage of ApplicationBar-->

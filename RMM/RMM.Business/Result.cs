@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RMM.Data;
 
 namespace RMM.Business
 {
-   public class Result<T>
+    public class Result<T>
     {
         public bool IsValid { get; set; }
         public T Value { get; set; }
@@ -29,10 +30,10 @@ namespace RMM.Business
 
             try
             {
-                codeAExecuter(resultat);
+                 codeAExecuter(resultat);
 
                 resultat.IsValid = true;
-                
+
 
             }
             catch (Exception except)

@@ -12,23 +12,34 @@ namespace RMM.Business.CategoryService
 {
     public class CategoryService : ICategoryService
     {
-        private RmmDataContext datacontext = null;
+        private RmmDataContext dataContext;
+
+        public RmmDataContext DataContext
+        {
+            get { return dataContext; }
+            set
+            {
+                dataContext = value;
+                dataContext.ObjectTrackingEnabled = true;
+                dataContext.Log = Console.Out;
+            }
+        }
 
         public Result<Category> DeleteCategorieById(int categoryId)
         {
             return Result<Category>.SafeExecute<CategoryService>(result =>
                 {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                    using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
-                    var category = (from t in datacontext.Category
+                    var category = (from t in DataContext.Category
                                     where t.ID == categoryId
                                     select t).First();
 
                     if (category != null)
                     {
-                        datacontext.Category.DeleteOnSubmit(category);
+                        DataContext.Category.Log().DeleteOnSubmit(category);
 
-                        datacontext.SubmitChanges();
+                        DataContext.SubmitChanges();
                     }
 
                     result.Value = category;
@@ -41,12 +52,12 @@ namespace RMM.Business.CategoryService
         {
             return Result<Category>.SafeExecute<CategoryService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
                     if(!OnMinimal)
-                    datacontext.LoadOptions = DBHelpers.GetConfigurationLoader<Category>(c => c.TransactionList);
+                        DataContext.LoadOptions = DBHelpers.GetConfigurationLoader<Category>(c => c.TransactionList);
 
-                    var category = datacontext.Category.Where(a => a.ID == categoryId).First();
+                    var category = DataContext.Category.Log().Where(a => a.ID == categoryId).First();
 
 
 
@@ -61,7 +72,7 @@ namespace RMM.Business.CategoryService
         {
             return Result<Category>.SafeExecute<CategoryService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
                     var newCategoryEntity = new Category()
                     {
@@ -70,14 +81,14 @@ namespace RMM.Business.CategoryService
                         CreatedDate = DateTime.Now,
                         Name = newCategoryCommand.Name
                     };
-                        
 
 
-                    datacontext.Category.InsertOnSubmit(newCategoryEntity);
 
-                    datacontext.SubmitChanges();
+                    DataContext.Category.Log().InsertOnSubmit(newCategoryEntity);
 
-                    var AddedCategory = datacontext.Category.Where(a => a.CreatedDate == newCategoryEntity.CreatedDate).First();
+                    DataContext.SubmitChanges();
+
+                    var AddedCategory = DataContext.Category.Log().Where(a => a.CreatedDate == newCategoryEntity.CreatedDate).First();
 
                     result.Value = AddedCategory;
 
@@ -91,10 +102,10 @@ namespace RMM.Business.CategoryService
             return Result<Category>.SafeExecute<CategoryService>(result =>
             {
 
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
 
-                    var entityToUpdate = datacontext.Category.Where(t => t.ID == editCategoryCommand.id).First();
+                    var entityToUpdate = DataContext.Category.Log().Where(t => t.ID == editCategoryCommand.id).First();
 
                     entityToUpdate.ID = editCategoryCommand.id;
                     entityToUpdate.Name = editCategoryCommand.Name;
@@ -102,7 +113,7 @@ namespace RMM.Business.CategoryService
                     entityToUpdate.CreatedDate = DateTime.Now;
 
 
-                    datacontext.SubmitChanges();
+                    DataContext.SubmitChanges();
 
                     result.Value = entityToUpdate;
                 }
@@ -114,14 +125,14 @@ namespace RMM.Business.CategoryService
         {
             return Result<List<Category>>.SafeExecute<CategoryService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
                     if (!OnMinimal)
                     {
-                        datacontext.LoadOptions = DBHelpers.GetConfigurationLoader<Category>(cat => cat.TransactionList);
+                        DataContext.LoadOptions = DBHelpers.GetConfigurationLoader<Category>(cat => cat.TransactionList);
                     }
 
-                    var categories = datacontext.Category.ToList();
+                    var categories = DataContext.Category.Log().ToList();
 
 
                     result.Value = categories;

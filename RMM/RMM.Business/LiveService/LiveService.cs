@@ -10,22 +10,25 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Live;
 using RMM.Data.Model;
+using RMM.Business.GeneralService;
+using Newtonsoft.Json;
 
 namespace RMM.Business.LiveService
 {
-    public class LiveService : ILiveService
+    public class LiveService : ILiveService, IJsonSerialisation
     {
-        public Result<SkyDriveBackupDto> BackupToSkyDriveNow(LiveConnectSession session)
+
+        public Result<SkyDriveBackup> BackupToSkyDrive(LiveConnectSession session)
         {
             throw new NotImplementedException();
         }
 
-        public Result<SkyDriveBackupDto> RestoreBackupFromSkyDriveNow(LiveConnectSession session)
+        public Result<SkyDriveBackup> RestoreBackupFromSkyDrive(LiveConnectSession session, int bakcupId)
         {
             throw new NotImplementedException();
         }
 
-        public Result<System.Collections.Generic.List<SkyDriveBackupDto>> GetBackupsFromSkyDriveMinimal(LiveConnectSession session)
+        public Result<System.Collections.Generic.List<SkyDriveBackup>> GetAllBackupsFromSkyDrive(LiveConnectSession session)
         {
             throw new NotImplementedException();
         }
@@ -40,9 +43,61 @@ namespace RMM.Business.LiveService
             throw new NotImplementedException();
         }
 
-        public Result<SkyDriveBackupDto> CheckLastSkyDriveSync(int lastIdBackup)
+
+        public bool CheckNetWork()
         {
             throw new NotImplementedException();
+        }
+
+        private byte[] CreateTempFile()
+        {
+            return null;
+        }
+
+        private bool DeleteTempFile()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Creer L'arborescence sur SKyDrive a savoir:
+        /// 
+        /// Easy Money 
+        /// ----------------------------------------------------------------------------
+        /// |  Fichier Readme
+        /// |
+        /// |Backups dans le dossier suivant
+        /// |---------------------------------------------------------------------------
+        /// | fichiers avec pour pattern: 
+        /// | - 2012-01-01-EasyMoneyBackUp.txt
+        /// | - 2012-01-02-EasyMoneyBackUp.txt
+        /// </summary>
+        /// <returns></returns>
+        private bool CreateFirstTreeOnSkyDrive()
+        {
+            return false;
+        }
+
+
+        /// <summary>
+        /// Retourne un String ( peut etre une liste ? ) sous forme JSON
+        /// </summary>
+        /// <param name="entree"></param>
+        /// <returns></returns>
+        public string returnJson(object entree)
+        {
+            return JsonConvert.SerializeObject(entree, Formatting.Indented);
+        }
+
+        /// <summary>
+        /// Retourne un object de type T ( peut etre une liste ?) sous forme JSON  
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectFromstringToReturn"></param>
+        /// <returns></returns>
+        public T returnObject<T>(string objectFromstringToReturn)
+        {
+            return JsonConvert.DeserializeObject<T>(objectFromstringToReturn);
         }
     }
 }

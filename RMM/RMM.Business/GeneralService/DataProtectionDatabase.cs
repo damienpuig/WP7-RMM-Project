@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.IO.IsolatedStorage;
+using Newtonsoft.Json;
 
 //http://fiercedesign.wordpress.com/2011/11/03/windows-phone-7-encrypt-data/
 //http://msdn.microsoft.com/en-us/library/system.security.cryptography.protecteddata(VS.95).aspx
@@ -35,16 +36,17 @@ namespace RMM.Business.GeneralService
             }
         }
 
-        public virtual byte[] UnProtect(string path)
+        public virtual string UnProtect(string path)
         {
             using (IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                byte[] ProtectedPinByte = ReadStringFromFile(path);
-                byte[] BaseByte = ProtectedData.Unprotect(ProtectedPinByte, null);
-                return BaseByte;
+                //byte[] ProtectedPinByte = ReadStringFromFile(path);
+                //byte[] BaseByte = ProtectedData.Unprotect(ProtectedPinByte, null);
+                //return Encoding.UTF8.GetString(BaseByte, 0, BaseByte.Length);
+                
+                return "blague";
             }
         }
-
 
         private byte[] ReadStringFromFile(string path)
         {
@@ -61,9 +63,6 @@ namespace RMM.Business.GeneralService
                 return BaseArray;
             }
         }
-
-
-
     }
 
 }

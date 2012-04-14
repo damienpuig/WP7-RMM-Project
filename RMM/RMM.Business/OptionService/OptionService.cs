@@ -9,16 +9,28 @@ namespace RMM.Business.OptionService
 {
     public class OptionService : IOptionService
     {
-        private RmmDataContext datacontext = null;
+        private RmmDataContext dataContext;
+
+        public RmmDataContext DataContext
+        {
+            get { return dataContext; }
+            set
+            {
+                dataContext = value;
+                dataContext.ObjectTrackingEnabled = true;
+                dataContext.Log = Console.Out;
+            }
+        }
+
 
         public Result<Option> GetOption()
         {
             return Result<Option>.SafeExecute<IOptionService>(result =>
             {
 
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
-                    var option = (from t in datacontext.Option
+                    var option = (from t in DataContext.Option
                                   select t).First();
 
                     result.Value = option;
@@ -32,9 +44,9 @@ namespace RMM.Business.OptionService
             return Result<Option>.SafeExecute<IOptionService>(result =>
             {
 
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
-                    var entityToUpdate = datacontext.Option.First();
+                    var entityToUpdate = DataContext.Option.Log().First();
 
                     entityToUpdate.IsPassword = optionToUpdate.IsPassword;
                     entityToUpdate.IsPrimaryTile = optionToUpdate.IsPrimaryTile;
@@ -43,7 +55,7 @@ namespace RMM.Business.OptionService
                     entityToUpdate.ModifiedDate = DateTime.Now;
                     entityToUpdate.RefreshTimeBackup = optionToUpdate.RefreshTimeBackup;
 
-                    datacontext.SubmitChanges();
+                    DataContext.SubmitChanges();
 
                     result.Value = entityToUpdate;
                 }
@@ -58,7 +70,7 @@ namespace RMM.Business.OptionService
         {
             return Result<Option>.SafeExecute<IOptionService>(result =>
             {
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
                     var newFirstTimeOption = new Option()
                     {
@@ -72,9 +84,9 @@ namespace RMM.Business.OptionService
                         RefreshTimeBackup = DateTime.Now
                     };
 
-                    datacontext.Option.InsertOnSubmit(newFirstTimeOption);
+                    DataContext.Option.Log().InsertOnSubmit(newFirstTimeOption);
 
-                    datacontext.SubmitChanges();
+                    DataContext.SubmitChanges();
 
                     result.Value = newFirstTimeOption;
                 }
@@ -90,9 +102,9 @@ namespace RMM.Business.OptionService
             return Result<int>.SafeExecute<IOptionService>(result =>
             {
 
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
-                    var idFavorite = (from t in datacontext.Option
+                    var idFavorite = (from t in DataContext.Option
                                       select t.Favorite).First();
 
                     result.Value = idFavorite;
@@ -108,16 +120,16 @@ namespace RMM.Business.OptionService
             return Result<int>.SafeExecute<IOptionService>(result =>
             {
 
-                using (datacontext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
+                using (DataContext = new RmmDataContext(RmmDataContext.CONNECTIONSTRING))
                 {
 
-                    var entityToUpdate = datacontext.Option.First();
+                    var entityToUpdate = DataContext.Option.Log().First();
 
                     entityToUpdate.Favorite = AccountId;
 
-                    
 
-                    datacontext.SubmitChanges();
+
+                    DataContext.SubmitChanges();
 
                     result.Value = AccountId;
                 }

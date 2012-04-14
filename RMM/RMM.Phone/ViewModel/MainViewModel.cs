@@ -16,6 +16,13 @@ using System.Linq;
 using RMM.Phone.ExtensionMethods;
 using System.Collections.Generic;
 using RMM.Phone.Execution;
+using RMM.Business.GeneralService;
+using System.IO.IsolatedStorage;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Windows.Resources;
+
 
 
 namespace RMM.Phone.ViewModel
@@ -217,7 +224,6 @@ namespace RMM.Phone.ViewModel
             #endregion
 
             ExecuteSafeDispatcher(() => SetOption(), () => RefreshAccountAndFavori(), () => RefreshCategory());
-
         }
 
         public void RefreshAccountAndFavori()

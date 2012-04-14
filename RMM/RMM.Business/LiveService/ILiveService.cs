@@ -15,20 +15,20 @@ namespace RMM.Business.LiveService
         /// Backup la base actuelle sur skyDrive
         /// </summary>
         /// <returns></returns>
-        Result<SkyDriveBackupDto> BackupToSkyDriveNow(LiveConnectSession session);
+        Result<SkyDriveBackup> BackupToSkyDrive(LiveConnectSession session);
 
         /// <summary>
         /// restore la base depuis skydrive: attention bloquer l'application et mettre en place un systeme de check au demarrage
         /// </summary>
         /// <param name="session"></param>
         /// <returns>retourne la backup utilisée pour l'operation</returns>
-        Result<SkyDriveBackupDto> RestoreBackupFromSkyDriveNow(LiveConnectSession session);
+        Result<SkyDriveBackup> RestoreBackupFromSkyDrive(LiveConnectSession session, int bakcupId);
 
         /// <summary>
         /// retourne la liste des backups disponible sur skydrive en minimal, pas de chargement du flux de données.
         /// </summary>
         /// <returns>retourne une liste de d'object SkyDriveBackup minimale, sans MemoryStream</returns>
-        Result<List<SkyDriveBackupDto>> GetBackupsFromSkyDriveMinimal(LiveConnectSession session);
+        Result<List<SkyDriveBackup>> GetAllBackupsFromSkyDrive(LiveConnectSession session);
 
 
         /// <summary>
@@ -48,7 +48,13 @@ namespace RMM.Business.LiveService
         Result<bool> DeleteAllBackupOnSkyDrive(LiveConnectSession session);
 
 
-        Result<SkyDriveBackupDto> CheckLastSkyDriveSync(int lastIdBackup);
+        /// <summary>
+        /// Regarde si il y a le reseau
+        /// </summary>
+        /// <returns></returns>
+        bool CheckNetWork();
+
+        
         
 
 

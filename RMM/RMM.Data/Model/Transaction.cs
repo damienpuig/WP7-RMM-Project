@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Data.Linq.Mapping;
 using System.Data.Linq;
+using Newtonsoft.Json;
 
 
 namespace RMM.Data.Model
 {
     [Table(Name="Transaction")]
+    [JsonObject]
     public class Transaction
     {
-
+         [JsonIgnore]
         private Nullable<int> accountID;
+        [JsonIgnore]
         private Nullable<int> categoryID;
 
         private EntityRef<Account> AccountRef = new EntityRef<Account>();
@@ -20,26 +23,32 @@ namespace RMM.Data.Model
 
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        [JsonProperty]
         public int ID { get; set; }
 
         [Column]
+        [JsonProperty]
         public string Name { get; set; }
 
         [Column]
+        [JsonProperty]
         public string Description { get; set; }
 
         [Column]
+        [JsonProperty]
         public double Amount { get; set; }
 
 
     [Column(Storage="accountID", DbType="Int")]
+        [JsonProperty]
         public int? AccountID
     {
         get { return this.accountID;}
         set { this.accountID = value; }
     }
 
-            [Column(Storage="categoryID", DbType="Int")]
+       [Column(Storage="categoryID", DbType="Int")]
+        [JsonProperty]
         public int? CategoryID
     {
         get { return this.categoryID;}
@@ -49,6 +58,7 @@ namespace RMM.Data.Model
 
 
         [Association(Name="FK_Account_Transactions", Storage = "AccountRef", ThisKey = "AccountID", OtherKey = "ID", IsForeignKey = true)]
+        [JsonIgnore]
         public Account Account 
         {
             get { return this.AccountRef.Entity; }
@@ -81,6 +91,7 @@ namespace RMM.Data.Model
 
         
         [Association(Name = "FK_Category_Transactions", Storage = "CategoryRef", ThisKey = "CategoryID", OtherKey = "ID", IsForeignKey = true)]
+        [JsonIgnore]
         public Category Category 
         {
             get { return this.CategoryRef.Entity; }
@@ -112,6 +123,7 @@ namespace RMM.Data.Model
         }
 
         [Column]
+        [JsonProperty]
         public DateTime CreatedDate { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace RMM.Phone.ViewModel
             SimpleIoc.Default.Register<CreateAccountViewModel>();
             SimpleIoc.Default.Register<CreateCategoryViewModel>();
             SimpleIoc.Default.Register<LiveSignInViewModel>();
+            SimpleIoc.Default.Register<RestaurerViewModel>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -82,7 +83,7 @@ namespace RMM.Phone.ViewModel
             }
         }
 
-        public LiveSignInViewModel Live
+        public static LiveSignInViewModel Live
         {
             get
             {
@@ -90,12 +91,23 @@ namespace RMM.Phone.ViewModel
             }
         }
 
+        public RestaurerViewModel Restaurer
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RestaurerViewModel>();
+            }
+        }
+
+        
+
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>
         public static void Cleanup()
         {
             //que c'est pas tres beau
+            Live.Cleanup();
         }
     }
 }

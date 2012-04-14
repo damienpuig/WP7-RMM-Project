@@ -9,6 +9,8 @@ using RMM.Phone.ExtensionMethods;
 using System.Linq;
 using System.Windows;
 using RMM.Phone.Execution;
+using RMM.Business.GeneralService;
+using RMM.Data.Model;
 
 namespace RMM.Phone.ViewModel
 {
@@ -32,7 +34,7 @@ namespace RMM.Phone.ViewModel
         public ICategoryService CategoryService { get; set; }
         public ITransactionService TransactionService { get; set; }
 
-        public AccountViewModel(IAccountService accountService, ITransactionService transactionService, ICategoryService categoryService)
+        public AccountViewModel( IAccountService accountService, ITransactionService transactionService, ICategoryService categoryService)
         {
             AccountService = accountService;
             TransactionService = transactionService;
