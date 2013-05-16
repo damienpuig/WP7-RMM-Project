@@ -1,7 +1,7 @@
 WP7-RMM-Project
 ===============
 
-A Banking Accounts Manager, directly in a Windows Phone Application. The application is obviously developed in C#.
+A Windows Phone Banking Accounts Manager. The application is obviously developed in C#.
 The project has been done for a Windows Phone Hackathon in Paris.
 
 
